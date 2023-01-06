@@ -189,6 +189,12 @@ namespace RoundStart.Events
             Event();
         }
 
+        [PluginEvent(ServerEventType.RoundEnd)]
+        public void onRound()
+        {
+            playerList.Clear();
+        }
+
         EventCheck eventCheck = new EventCheck(false);
 
         public void Event()

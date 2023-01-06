@@ -28,6 +28,11 @@ namespace RoundStart.Events
             players.Remove(player);
         }
 
+        public void Clear()
+        {
+            players.Clear();
+        }
+
 
 
     }
