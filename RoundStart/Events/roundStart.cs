@@ -190,7 +190,7 @@ namespace RoundStart.Events
         }
 
         [PluginEvent(ServerEventType.RoundEnd)]
-        public void onRound()
+        public void onRound(RoundSummary.LeadingTeam leading)
         {
             playerList.Clear();
         }
