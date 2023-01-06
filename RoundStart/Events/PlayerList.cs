@@ -10,25 +10,25 @@ namespace RoundStart.Events
     public class PlayerList
     {
 
-        private List<IPlayer> players = new List<IPlayer>();
+        private static List<IPlayer> players = new List<IPlayer>();
 
 
-        public List<IPlayer> GetPlayers()
+        public static List<IPlayer> GetPlayers()
         {
             return players;
         }
 
-        public void AddPlayer(IPlayer player)
+        public static void AddPlayer(IPlayer player)
         {
             players.Add(player);
         }
 
-        public void RemovePlayer(IPlayer player)
+        public static void RemovePlayer(IPlayer player)
         {
             players.Remove(player);
         }
 
-        public void Clear()
+        public static void Clear()
         {
             players.Clear();
         }

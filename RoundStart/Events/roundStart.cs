@@ -169,18 +169,16 @@ namespace RoundStart.Events
 
         }
 
-        PlayerList playerList = new PlayerList();
-
         [PluginEvent(ServerEventType.PlayerJoined)]
         public void onPlayerJoin(IPlayer player)
         {
-            playerList.AddPlayer(player);
+            PlayerList.AddPlayer(player);
         }
 
         [PluginEvent(ServerEventType.PlayerLeft)]
         public void onPlayerLeft(IPlayer player)
         {
-            playerList.RemovePlayer(player);
+            PlayerList.RemovePlayer(player);
         }
 
         [PluginEvent(ServerEventType.RoundStart)]
@@ -192,14 +190,14 @@ namespace RoundStart.Events
         [PluginEvent(ServerEventType.RoundEnd)]
         public void onRound(RoundSummary.LeadingTeam leading)
         {
-            playerList.Clear();
+            PlayerList.Clear();
         }
 
         EventCheck eventCheck = new EventCheck(false);
 
         public void Event()
         {
-            if (playerList.GetPlayers().Count < 10)
+            if (PlayerList.GetPlayers().Count < 10)
             {
                 eventCheck.Active = true;
 
@@ -213,7 +211,7 @@ namespace RoundStart.Events
                 int eventid = random.Next(10);
 
 
-                foreach (IPlayer player in playerList.GetPlayers())
+                foreach (IPlayer player in PlayerList.GetPlayers())
                 {
    
 

@@ -13,11 +13,9 @@ namespace RoundStart.Events
 {
     public class TutorialBattle
     {
-        PlayerList players = new PlayerList();
-
         public void TutorialEvent()
         {
-            foreach (Player player in players.GetPlayers()) 
+            foreach (Player player in PlayerList.GetPlayers()) 
             {
                 player.SetRole(RoleTypeId.Tutorial, RoleChangeReason.RoundStart);
                 
