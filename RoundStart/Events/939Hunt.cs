@@ -34,7 +34,11 @@ namespace RoundStart.Events
 
             int index = random.Next(playerList.GetPlayers().Count);
 
-            IPlayer playertarget = playerList.GetPlayers()[index];
+            List<IPlayer> targetlist = new List<IPlayer>();
+
+            targetlist = playerList.GetPlayers();
+
+            IPlayer playertarget = targetlist[index];
 
             Player player = (Player)playertarget;
 
