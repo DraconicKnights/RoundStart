@@ -219,18 +219,18 @@ namespace RoundStart.Events
                             _939._939Event();
 
                             break;
+
+
+                        case 6:
+                            TutorialBattle tutorial = new TutorialBattle();
+                            tutorial.TutorialEvent();
+                            break;  
                             
                             
                     }
 
-                    foreach (Player player1 in playerList.GetPlayers())
-                    {
-                        if (player1.Nickname == "Shadower")
-                        {
-                            _939Hunt _939 = new _939Hunt();
-                            _939._939Event();
-                        }
-                    }
+
+
                 }
             }
         }

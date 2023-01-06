@@ -92,6 +92,7 @@
     <Compile Include="Events\EventCheck.cs" />
     <Compile Include="Events\PlayerList.cs" />
     <Compile Include="Events\roundStart.cs" />
+    <Compile Include="Events\TutorialBattle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
