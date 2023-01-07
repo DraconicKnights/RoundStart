@@ -197,6 +197,7 @@ namespace RoundStart.Events
 
         public void Event()
         {
+
             if (PlayerList.GetPlayers().Count < 10)
             {
                 eventCheck.Active = true;
@@ -228,11 +229,10 @@ namespace RoundStart.Events
                         case 6:
                             TutorialBattle tutorial = new TutorialBattle();
                             tutorial.TutorialEvent();
-                            break;  
+                            break;
                             
                             
                     }
-
 
 
                 }
