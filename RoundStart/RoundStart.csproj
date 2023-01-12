@@ -88,11 +88,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Events\939Hunt.cs" />
     <Compile Include="Events\EventCheck.cs" />
-    <Compile Include="Events\PlayerList.cs" />
     <Compile Include="Events\roundStart.cs" />
-    <Compile Include="Events\TutorialBattle.cs" />
+    <Compile Include="Events\Staff\StaffList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
