@@ -4,6 +4,9 @@ namespace RoundStart
 {
     public class Config
     {
-        public static string staff_id { get; set; }
+        public static bool SCP914ProcessPlayerEvent { get; set; } = true;
+        public static bool SCP079NoiseEvent { get; set; } = true;
+   
+
     }
 }
