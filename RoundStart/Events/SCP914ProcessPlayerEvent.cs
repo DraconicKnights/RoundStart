@@ -30,9 +30,10 @@ namespace RoundStart.Events
         void onProcesPlayer(IPlayer player, Scp914KnobSetting setting, UnityEngine.Vector3 vector)
         {
 
-            if (!Config.SCP914ProcessPlayerEvent == true)
-                return;
+            Config config = new Config();
 
+            if (!config.SCP914ProcessPlayerEvent == true)
+                return;
 
             Player player1 = ( Player)player;
 

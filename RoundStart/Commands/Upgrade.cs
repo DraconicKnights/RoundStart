@@ -1,6 +1,10 @@
 ﻿using CommandSystem;
+using Interactables.Interobjects;
+using Interactables.Interobjects.DoorUtils;
 using InventorySystem.Items;
+using MapGeneration;
 using PluginAPI.Core;
+using PluginAPI.Core.Zones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,22 +35,13 @@ namespace RoundStart.Commands
                 return true;
             }
 
+
             foreach (Player player in Player.GetPlayers())
             {
-                ItemBase item = player.CurrentItem;
+                player.SetRole(PlayerRoles.RoleTypeId.ClassD, PlayerRoles.RoleChangeReason.RemoteAdmin);
+                player.AddItem(ItemType.GunRevolver);
 
-                switch (item.ItemTypeId)
-                {
-                    case ItemType.KeycardJanitor:
-                        player.AddItem(ItemType.KeycardNTFCommander);
-                        item.ServerDropItem().DestroySelf();
-                        break;
-                    case ItemType.KeycardNTFCommander:
-                        player.AddItem(ItemType.KeycardNTFCommander);
-                        item.ServerDropItem().DestroySelf();
-                        break;
 
-                }
             }
 
 

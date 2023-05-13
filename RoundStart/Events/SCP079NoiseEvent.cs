@@ -18,7 +18,8 @@ namespace RoundStart.Events
         public void onNoise(IPlayer player)
         {
 
-            if (!Config.SCP079NoiseEvent == true)
+            Config config = new Config();
+            if (!config.SCP079NoiseEvent == true)
                 return;
 
             Player player1 = (Player)player;
