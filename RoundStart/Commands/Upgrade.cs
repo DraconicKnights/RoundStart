@@ -41,6 +41,7 @@ namespace RoundStart.Commands
 
                 player.SetRole(PlayerRoles.RoleTypeId.ClassD, PlayerRoles.RoleChangeReason.RemoteAdmin);
                 player.AddItem(ItemType.GunRevolver);
+                player.AddAmmo(ItemType.Ammo44cal, 20);
 
 
             }

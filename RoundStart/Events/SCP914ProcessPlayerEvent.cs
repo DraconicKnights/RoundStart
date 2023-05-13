@@ -32,10 +32,11 @@ namespace RoundStart.Events
 
             Config config = new Config();
 
-            if (!config.SCP914ProcessPlayerEvent == true)
+            if (!config.SCP914ProcessPlayerEvent)
                 return;
 
             Player player1 = ( Player)player;
+
 
          
 

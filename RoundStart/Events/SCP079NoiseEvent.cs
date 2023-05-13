@@ -19,7 +19,7 @@ namespace RoundStart.Events
         {
 
             Config config = new Config();
-            if (!config.SCP079NoiseEvent == true)
+            if (!config.SCP079NoiseEvent)
                 return;
 
             Player player1 = (Player)player;
