@@ -38,6 +38,7 @@ namespace RoundStart.Commands
 
             foreach (Player player in Player.GetPlayers())
             {
+
                 player.SetRole(PlayerRoles.RoleTypeId.ClassD, PlayerRoles.RoleChangeReason.RemoteAdmin);
                 player.AddItem(ItemType.GunRevolver);
 
