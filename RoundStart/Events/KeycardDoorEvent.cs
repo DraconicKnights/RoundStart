@@ -8,11 +8,36 @@ using MapGeneration;
 using InventorySystem.Items;
 using Interactables.Interobjects;
 using System.Linq;
+using RoundStart.Events.Items;
+using InventorySystem.Items.Firearms;
+using PluginAPI.Core.Zones.Entrance;
 
 namespace RoundStart.Events
 {
     public class KeycardDoorEvent
     {
+
+
+        [PluginEvent(ServerEventType.RoundStart)]
+        void onStart()
+        {
+            Itemlist.addItem(ItemType.GunFSP9);
+            Itemlist.addItem(ItemType.GunCOM18);
+            Itemlist.addItem(ItemType.GunE11SR);
+            Itemlist.addItem(ItemType.GunCOM18);
+            Itemlist.addItem(ItemType.GunCrossvec);
+            Itemlist.addItem(ItemType.GunRevolver);
+            Itemlist.addItem(ItemType.GunLogicer);
+            Itemlist.addItem(ItemType.GunShotgun);
+
+            
+        }
+
+        [PluginEvent(ServerEventType.RoundRestart)]
+        void onRestart()
+        {
+            Itemlist.itemClear();
+        }
 
         [PluginEvent(ServerEventType.PlayerInteractDoor)]
         void oninteractDoor(IPlayer player, DoorVariant doorVariant, bool canOpen)

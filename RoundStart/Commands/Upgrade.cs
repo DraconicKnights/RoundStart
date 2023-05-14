@@ -1,10 +1,13 @@
 ﻿using CommandSystem;
 using Interactables.Interobjects;
 using Interactables.Interobjects.DoorUtils;
+using InventorySystem;
 using InventorySystem.Items;
+using InventorySystem.Items.Firearms;
 using MapGeneration;
 using PluginAPI.Core;
 using PluginAPI.Core.Zones;
+using RoundStart.Events.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +21,8 @@ namespace RoundStart.Commands
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Upgrade : ICommand, IUsageProvider
     {
+
+        Random random = new Random();
         public string Command => "upgrade";
 
         public string[] Aliases => null;
@@ -39,10 +44,31 @@ namespace RoundStart.Commands
             foreach (Player player in Player.GetPlayers())
             {
 
-                player.SetRole(PlayerRoles.RoleTypeId.ClassD, PlayerRoles.RoleChangeReason.RemoteAdmin);
-                player.AddItem(ItemType.GunRevolver);
-                player.AddAmmo(ItemType.Ammo44cal, 20);
+                int id = random.Next(Itemlist.GetItemTypes().Count);
 
+                ItemType item = Itemlist.GetItemTypes()[id];
+
+                player.ClearInventory();
+
+                player.SetRole(PlayerRoles.RoleTypeId.ClassD, PlayerRoles.RoleChangeReason.RemoteAdmin);
+                player.AddAmmo(ItemType.Ammo44cal, 20);
+                player.AddAmmo(ItemType.Ammo12gauge, 20);
+                player.AddAmmo(ItemType.Ammo556x45, 20);
+                player.AddAmmo(ItemType.Ammo762x39, 20);
+                player.AddAmmo(ItemType.Ammo9x19, 20);
+
+
+                foreach (DoorVariant doorVariant in DoorVariant.AllDoors)
+                {
+
+                    UnityEngine.Vector3 vector3 = doorVariant.transform.position;
+
+                    UnityEngine.Vector3 location = new UnityEngine.Vector3(vector3.x, vector3.y + 2, vector3.z);
+
+                    player.Position = location;
+                }
+
+                FirearmCreation(player, item);
 
             }
 
@@ -50,6 +76,16 @@ namespace RoundStart.Commands
             response = "You're equipped item has been upgraded";
 
             return true;
+        }
+
+
+        private void FirearmCreation(Player player, ItemType item)
+        {
+
+            Firearm firearm = player.ReferenceHub.inventory.ServerAddItem(item) as Firearm;
+
+            firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, FirearmStatusFlags.Chambered, 0);
+
         }
     }
 }
