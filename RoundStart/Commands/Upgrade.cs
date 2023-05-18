@@ -31,6 +31,8 @@ namespace RoundStart.Commands
 
         public string[] Usage => null;
 
+        List<DoorVariant> doorslist = new List<DoorVariant>();
+
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
 
@@ -57,16 +59,40 @@ namespace RoundStart.Commands
                 player.AddAmmo(ItemType.Ammo762x39, 20);
                 player.AddAmmo(ItemType.Ammo9x19, 20);
 
-
-                foreach (DoorVariant doorVariant in DoorVariant.AllDoors)
+                if (doorslist.IsEmpty())
                 {
+                    foreach (DoorVariant doorVariant in DoorVariant.AllDoors)
+                    {
+                        if (doorVariant is BreakableDoor breakable)
+                        {
+                            if (breakable.IsInZone(MapGeneration.FacilityZone.HeavyContainment))
+                            {
+                                if (doorVariant.name != "CHECKPOINT")
+                                {
+                                    doorslist.Add(doorVariant);
+                                    doorVariant.NetworkTargetState = true;
+                                    doorVariant.ServerChangeLock(DoorLockReason.AdminCommand, true);
+                                }
+                            }
 
-                    UnityEngine.Vector3 vector3 = doorVariant.transform.position;
+                            if (breakable.IsInZone(MapGeneration.FacilityZone.Entrance))
+                            {
+                                doorVariant.NetworkTargetState = false;
+                                doorVariant.ServerChangeLock(DoorLockReason.AdminCommand, true) ;
+                            }
+                        }
 
-                    UnityEngine.Vector3 location = new UnityEngine.Vector3(vector3.x, vector3.y + 2, vector3.z);
-
-                    player.Position = location;
+                    }
                 }
+
+
+                int doorid = random.Next(doorslist.Count);
+
+                UnityEngine.Vector3 vector3 = doorslist[doorid].transform.position;
+
+                UnityEngine.Vector3 location = new UnityEngine.Vector3(vector3.x, vector3.y + 2, vector3.z);
+
+                player.Position = location;
 
                 FirearmCreation(player, item);
 
