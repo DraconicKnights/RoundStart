@@ -110,7 +110,7 @@ namespace RoundStart.Commands
 
             Firearm firearm = player.ReferenceHub.inventory.ServerAddItem(item) as Firearm;
 
-            firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, FirearmStatusFlags.Chambered, 0);
+            firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, FirearmStatusFlags.Chambered, 1);
 
         }
     }
