@@ -148,13 +148,15 @@
     <Compile Include="Events\EventCheck.cs" />
     <Compile Include="Events\SCP079NoiseEvent.cs" />
     <Compile Include="Events\SCP914ProcessPlayerEvent.cs" />
-    <Compile Include="Events\Staff\StaffList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Events\Staff\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

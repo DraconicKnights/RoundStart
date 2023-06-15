@@ -98,6 +98,10 @@ namespace RoundStart.Events
                     }
                 }
             }
+
+            var teslagate = typeof(TeslaGate).GetEvent("OnBusted", System.Reflection.BindingFlags.Static);
+
+            
         }
     }
 }
