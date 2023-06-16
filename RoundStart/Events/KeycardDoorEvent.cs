@@ -11,6 +11,8 @@ using System.Linq;
 using RoundStart.Events.Items;
 using InventorySystem.Items.Firearms;
 using PluginAPI.Core.Zones.Entrance;
+using PluginAPI.Core.Items;
+using System;
 
 namespace RoundStart.Events
 {
@@ -21,14 +23,12 @@ namespace RoundStart.Events
         [PluginEvent(ServerEventType.RoundStart)]
         void onStart()
         {
-            Itemlist.addItem(ItemType.GunFSP9);
-            Itemlist.addItem(ItemType.GunCOM18);
-            Itemlist.addItem(ItemType.GunE11SR);
-            Itemlist.addItem(ItemType.GunCOM18);
-            Itemlist.addItem(ItemType.GunCrossvec);
-            Itemlist.addItem(ItemType.GunRevolver);
-            Itemlist.addItem(ItemType.GunLogicer);
-            Itemlist.addItem(ItemType.GunShotgun);
+            var allitems = (ItemType[]) Enum.GetValues(typeof(ItemType));
+
+            foreach (ItemType item in allitems)
+            {
+                Itemlist.addItem(item);
+            }
 
             
         }

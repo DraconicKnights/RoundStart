@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using RoundStart.Roles;
+using System.Collections.Generic;
 
 namespace RoundStart
 {
@@ -8,6 +9,8 @@ namespace RoundStart
         public bool SCP079NoiseEvent { get; set; } = true;
         public List<string> dev_id { get; set; } = new List<string>();
         public bool KeycardDoorEvent { get; set; } = true;
+
+        public List<Role> Roles { get; set; } = new List<Role>();
      
 
     }

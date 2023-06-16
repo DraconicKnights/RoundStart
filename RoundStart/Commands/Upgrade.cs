@@ -6,6 +6,7 @@ using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
 using MapGeneration;
 using PluginAPI.Core;
+using PluginAPI.Core.Interfaces;
 using PluginAPI.Core.Zones;
 using RoundStart.Events.Items;
 using System;

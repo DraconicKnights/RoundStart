@@ -38,8 +38,6 @@ namespace RoundStart.Events
             Player player1 = ( Player)player;
 
 
-         
-
             switch (setting)
             {
                 case Scp914KnobSetting.Rough:
