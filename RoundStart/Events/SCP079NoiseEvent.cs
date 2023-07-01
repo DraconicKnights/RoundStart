@@ -1,10 +1,13 @@
-﻿using PluginAPI.Core;
+﻿using System;
+using PluginAPI.Core;
 using PluginAPI.Enums;
 using PluginAPI.Core.Attributes;
 using PlayerRoles;
 using UnityEngine;
 using Random = System.Random;
 using PluginAPI.Core.Interfaces;
+using PluginAPI.Events;
+using Object = UnityEngine.Object;
 
 
 namespace RoundStart.Events
@@ -15,14 +18,14 @@ namespace RoundStart.Events
         Random random = new Random();
 
         [PluginEvent(ServerEventType.PlayerMakeNoise)]
-        public void onNoise(IPlayer player)
+        public void onNoise(PlayerMakeNoiseEvent playerMakeNoiseEvent)
         {
 
             Config config = new Config();
             if (!config.SCP079NoiseEvent)
                 return;
 
-            Player player1 = (Player)player;
+            Player player1 = playerMakeNoiseEvent.Player;
 
             int id = random.Next(10);
 
@@ -64,7 +67,6 @@ namespace RoundStart.Events
 
             SCP.SendBroadcast(target.RoleName.ToString() + " Detected in " + name, 10, Broadcast.BroadcastFlags.AdminChat, false);
         }
-
 
 
     }

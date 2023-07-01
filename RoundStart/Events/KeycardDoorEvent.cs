@@ -13,6 +13,8 @@ using InventorySystem.Items.Firearms;
 using PluginAPI.Core.Zones.Entrance;
 using PluginAPI.Core.Items;
 using System;
+using PluginAPI.Events;
+using UnityEngine;
 
 namespace RoundStart.Events
 {
@@ -40,24 +42,23 @@ namespace RoundStart.Events
         }
 
         [PluginEvent(ServerEventType.PlayerInteractDoor)]
-        void oninteractDoor(IPlayer player, DoorVariant doorVariant, bool canOpen)
+        void oninteractDoor(PlayerInteractDoorEvent playerInteractDoorEvent)
         {
 
             Config config = new Config();
             if (!config.KeycardDoorEvent)
                 return;
 
-            Player player1 = (Player)player;
+            Player player = playerInteractDoorEvent.Player;
+            
+            var doorVariant = playerInteractDoorEvent.Door;
 
-            if (canOpen)
+            if (playerInteractDoorEvent.CanOpen)
                 return;
 
-            doorEvent(player1, doorVariant);
-
+            doorEvent(player, doorVariant);
             
         }
-
-
         private void doorEvent(Player player, DoorVariant doorVariant)
         {
 
@@ -99,9 +100,6 @@ namespace RoundStart.Events
                 }
             }
 
-            var teslagate = typeof(TeslaGate).GetEvent("OnBusted", System.Reflection.BindingFlags.Static);
-
-            
         }
     }
 }

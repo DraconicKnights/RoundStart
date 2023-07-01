@@ -2,18 +2,13 @@
 using Interactables.Interobjects;
 using Interactables.Interobjects.DoorUtils;
 using InventorySystem;
-using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
-using MapGeneration;
 using PluginAPI.Core;
-using PluginAPI.Core.Interfaces;
-using PluginAPI.Core.Zones;
 using RoundStart.Events.Items;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RoundStart.Commands
 {
@@ -111,7 +106,7 @@ namespace RoundStart.Commands
 
             Firearm firearm = player.ReferenceHub.inventory.ServerAddItem(item) as Firearm;
 
-            firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, FirearmStatusFlags.Chambered, 1);
+            firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, FirearmStatusFlags.Chambered, 0);
 
         }
     }

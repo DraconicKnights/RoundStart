@@ -18,6 +18,7 @@ namespace RoundStart
             EventManager.RegisterEvents<Events.SCP079NoiseEvent>(this);
             EventManager.RegisterEvents<Events.SCP914ProcessPlayerEvent>(this);
             EventManager.RegisterEvents<Events.KeycardDoorEvent>(this);
+            EventManager.RegisterEvents<Events.WarheadEvent>(this);
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using PluginAPI.Core.Attributes;
-using System;
+﻿using System;
+using PluginAPI.Core.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +15,13 @@ using InventorySystem;
 using PluginAPI.Core.Items;
 using Scp914;
 using System.Numerics;
+using CustomPlayerEffects;
+using Hints;
+using InventorySystem.Items.Firearms;
+using PluginAPI.Events;
+using UnityEngine;
+using Random = System.Random;
+using Vector3 = UnityEngine.Vector3;
 
 namespace RoundStart.Events
 {
@@ -27,7 +34,7 @@ namespace RoundStart.Events
         #region SCP914 Player
 
         [PluginEvent(ServerEventType.Scp914ProcessPlayer)]
-        void onProcesPlayer(IPlayer player, Scp914KnobSetting setting, UnityEngine.Vector3 vector)
+        void onProcesPlayer(Player player, Scp914KnobSetting setting, UnityEngine.Vector3 vector)
         {
 
             Config config = new Config();
@@ -69,8 +76,7 @@ namespace RoundStart.Events
 
 
         }
-
-
+        
         private void scp914CourseSelect(Player player)
         {
             int id = random.Next(10);
@@ -98,49 +104,43 @@ namespace RoundStart.Events
                 case 6:
                     player.Health = -10;
                     break;
-
-
+                
                 }
         }
 
         private void scp914ClassSelect(Player player)
         {
+            switch (player.Role)
+            {
+                case RoleTypeId.ClassD:
+                    player.SetRole(RoleTypeId.None);
+                    break;
+                case RoleTypeId.Scientist:
+                    player.SetRole(RoleTypeId.ClassD);
+                    break;
+                case RoleTypeId.FacilityGuard:
+                    player.SetRole(RoleTypeId.Scientist);
+                    break;
+                case RoleTypeId.ChaosConscript:
+                    player.SetRole(RoleTypeId.ClassD);
+                    break;
+                    
+            }
 
-            if (player.Role == RoleTypeId.ClassD)
-                player.SetRole(RoleTypeId.Scp939, RoleChangeReason.RemoteAdmin);
+        }
 
-            if (player.Role == RoleTypeId.Scientist)
-                player.SetRole(RoleTypeId.ClassD, RoleChangeReason.RemoteAdmin);
+        private void scp914VeryFine(Player player)
+        {
+            var allroles = (RoleTypeId[])Enum.GetValues(typeof(RoleTypeId));
+            
+            int id = random.Next(allroles.Length);
 
-            if (player.Role == RoleTypeId.FacilityGuard)
-                player.SetRole(RoleTypeId.Scp0492, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.NtfPrivate)
-                player.SetRole(RoleTypeId.FacilityGuard, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.NtfSergeant)
-                player.SetRole(RoleTypeId.NtfPrivate, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.NtfSpecialist)
-                player.SetRole(RoleTypeId.NtfPrivate, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.NtfCaptain)
-                player.SetRole(RoleTypeId.NtfSergeant, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.ChaosConscript)
-                player.SetRole(RoleTypeId.ClassD, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.ChaosRifleman)
-                player.SetRole(RoleTypeId.ChaosConscript, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.ChaosRepressor)
-                player.SetRole(RoleTypeId.ChaosRifleman, RoleChangeReason.RemoteAdmin);
-
-            if (player.Role == RoleTypeId.ChaosMarauder)
-                player.SetRole(RoleTypeId.ChaosRepressor, RoleChangeReason.RemoteAdmin);
-
-
-
+            var role = allroles[id];
+            
+            if (role == RoleTypeId.Filmmaker | role == RoleTypeId.Overwatch)
+                return;
+            
+            player.SetRole(role);
         }
 
     }
