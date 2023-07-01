@@ -61,45 +61,66 @@ namespace RoundStart.Events
         }
         private void doorEvent(Player player, DoorVariant doorVariant)
         {
-
-            if (doorVariant is CheckpointDoor checkpoint)
+            switch (doorVariant)
             {
-                foreach (ItemBase item in player.Items)
+                case CheckpointDoor checkpoint:
                 {
-                    switch (item.ItemTypeId)
+                    foreach (ItemBase item in player.Items)
                     {
-                        case ItemType.KeycardO5:
-                            if (!doorVariant.IsConsideredOpen())
-                                checkpoint.NetworkTargetState = true;
-                            if (doorVariant.IsConsideredOpen())
-                                checkpoint.NetworkTargetState = false;
-                            break;
-                        case ItemType.KeycardNTFCommander:
-                            if (!doorVariant.IsConsideredOpen())
-                                checkpoint.NetworkTargetState = true;
-                            if (doorVariant.IsConsideredOpen())
-                                checkpoint.NetworkTargetState = false;
-                            break;
+                        switch (item.ItemTypeId)
+                        {
+                            case ItemType.KeycardO5:
+                                if (!doorVariant.IsConsideredOpen())
+                                    checkpoint.NetworkTargetState = true;
+                                if (doorVariant.IsConsideredOpen())
+                                    checkpoint.NetworkTargetState = false;
+                                break;
+                            case ItemType.KeycardNTFCommander:
+                                if (!doorVariant.IsConsideredOpen())
+                                    checkpoint.NetworkTargetState = true;
+                                if (doorVariant.IsConsideredOpen())
+                                    checkpoint.NetworkTargetState = false;
+                                break;
+                        }
                     }
+
+                    break;
+                }
+                case PryableDoor pryableDoor:
+                {
+                    foreach (ItemBase item in player.Items)
+                    {
+                        switch (item.ItemTypeId)
+                        {
+                            case ItemType.KeycardO5:
+                                if (!doorVariant.IsConsideredOpen())
+                                    pryableDoor.NetworkTargetState = true;
+                                if (doorVariant.IsConsideredOpen())
+                                    pryableDoor.NetworkTargetState = false;
+                                break;
+                        }
+                    }
+
+                    break;
+                }
+                case BreakableDoor breakableDoor:
+                {
+                    foreach (ItemBase item in player.Items)
+                    {
+                        switch (item.ItemTypeId)
+                        {
+                            case ItemType.KeycardO5:
+                                if (!doorVariant.IsConsideredOpen())
+                                    breakableDoor.NetworkTargetState = true;
+                                if (doorVariant.IsConsideredOpen())
+                                    breakableDoor.NetworkTargetState = false;
+                                break;
+                        }
+                    }
+
+                    break;
                 }
             }
-
-            if (doorVariant is PryableDoor pryableDoor)
-            {
-                foreach (ItemBase item in player.Items)
-                {
-                    switch (item.ItemTypeId)
-                    {
-                        case ItemType.KeycardO5:
-                            if (!doorVariant.IsConsideredOpen())
-                                pryableDoor.NetworkTargetState = true;
-                            if (doorVariant.IsConsideredOpen())
-                                pryableDoor.NetworkTargetState = false;
-                            break;
-                    }
-                }
-            }
-
         }
     }
 }

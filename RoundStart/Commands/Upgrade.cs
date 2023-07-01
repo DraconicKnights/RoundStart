@@ -8,6 +8,8 @@ using RoundStart.Events.Items;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PlayerRoles.Spectating;
+using RemoteAdmin;
 
 
 namespace RoundStart.Commands
@@ -31,6 +33,12 @@ namespace RoundStart.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
+
+            if (!(sender is PlayerCommandSender playerCommandSender))
+            {
+                response = "Only players can use this command";
+                return true;
+            }
 
             if (!sender.CheckPermission(PlayerPermissions.GivingItems))
             {
@@ -59,24 +67,22 @@ namespace RoundStart.Commands
                 {
                     foreach (DoorVariant doorVariant in DoorVariant.AllDoors)
                     {
-                        if (doorVariant is BreakableDoor breakable)
+                        if (!(doorVariant is BreakableDoor breakable)) continue;
+                        
+                        if (breakable.IsInZone(MapGeneration.FacilityZone.HeavyContainment))
                         {
-                            if (breakable.IsInZone(MapGeneration.FacilityZone.HeavyContainment))
+                            if (doorVariant.name != "CHECKPOINT")
                             {
-                                if (doorVariant.name != "CHECKPOINT")
-                                {
-                                    doorslist.Add(doorVariant);
-                                    doorVariant.NetworkTargetState = true;
-                                    doorVariant.ServerChangeLock(DoorLockReason.AdminCommand, true);
-                                }
-                            }
-
-                            if (breakable.IsInZone(MapGeneration.FacilityZone.Entrance))
-                            {
-                                doorVariant.NetworkTargetState = false;
-                                doorVariant.ServerChangeLock(DoorLockReason.AdminCommand, true) ;
+                                doorslist.Add(doorVariant);
+                                doorVariant.NetworkTargetState = true;
+                                doorVariant.ServerChangeLock(DoorLockReason.AdminCommand, true);
                             }
                         }
+
+                        if (!breakable.IsInZone(MapGeneration.FacilityZone.Entrance)) continue;
+                        
+                        doorVariant.NetworkTargetState = false;
+                        doorVariant.ServerChangeLock(DoorLockReason.AdminCommand, true) ;
 
                     }
                 }
@@ -84,9 +90,9 @@ namespace RoundStart.Commands
 
                 int doorid = random.Next(doorslist.Count);
 
-                UnityEngine.Vector3 vector3 = doorslist[doorid].transform.position;
+                var vector3 = doorslist[doorid].transform.position;
 
-                UnityEngine.Vector3 location = new UnityEngine.Vector3(vector3.x, vector3.y + 2, vector3.z);
+                var location = new UnityEngine.Vector3(vector3.x, vector3.y + 2, vector3.z);
 
                 player.Position = location;
 
@@ -103,11 +109,10 @@ namespace RoundStart.Commands
 
         private void FirearmCreation(Player player, ItemType item)
         {
-
             Firearm firearm = player.ReferenceHub.inventory.ServerAddItem(item) as Firearm;
 
-            firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, FirearmStatusFlags.Chambered, 0);
-
+            if (firearm != null)
+                firearm.Status = new FirearmStatus(firearm.AmmoManagerModule.MaxAmmo, FirearmStatusFlags.Chambered, 0);
         }
     }
 }
