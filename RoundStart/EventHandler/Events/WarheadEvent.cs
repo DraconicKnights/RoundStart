@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using PlayerRoles;
 using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
 using PluginAPI.Events;
 
-namespace RoundStart.Events
+namespace RoundStart.EventHandler.Events
 {
     public class WarheadEvent
     {

@@ -1,6 +1,7 @@
 ﻿using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Events;
+using RoundStart.EventHandler.Events;
 
 namespace RoundStart
 {
@@ -14,10 +15,10 @@ namespace RoundStart
         {
             Log.Info("$Plugin is loading");
 
-            EventManager.RegisterEvents<Events.SCP079NoiseEvent>(this);
-            EventManager.RegisterEvents<Events.SCP914ProcessPlayerEvent>(this);
-            EventManager.RegisterEvents<Events.KeycardDoorEvent>(this);
-            EventManager.RegisterEvents<Events.WarheadEvent>(this);
+            EventManager.RegisterEvents<SCP079NoiseEvent>(this);
+            EventManager.RegisterEvents<SCP914ProcessPlayerEvent>(this);
+            EventManager.RegisterEvents<KeycardDoorEvent>(this);
+            EventManager.RegisterEvents<WarheadEvent>(this);
         }
     }
 }

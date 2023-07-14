@@ -1,22 +1,18 @@
-﻿using PluginAPI.Core;
-using PluginAPI.Enums;
-using PluginAPI.Core.Attributes;
-using PlayerRoles;
+﻿using System;
+using Interactables.Interobjects;
 using Interactables.Interobjects.DoorUtils;
 using InventorySystem.Items;
-using Interactables.Interobjects;
-using RoundStart.Events.Items;
-using System;
-using System.Collections;
-using CustomPlayerEffects;
+using PluginAPI.Core;
+using PluginAPI.Core.Attributes;
+using PluginAPI.Enums;
 using PluginAPI.Events;
-using UnityEngine;
+using RoundStart.EventHandler.EventManager;
+using RoundStart.Items;
 
-namespace RoundStart.Events
+namespace RoundStart.EventHandler.Events
 {
     public class KeycardDoorEvent
     {
-
 
         [PluginEvent(ServerEventType.RoundStart)]
         void onStart()
@@ -27,7 +23,6 @@ namespace RoundStart.Events
             {
                 Itemlist.addItem(item);
             }
-
             
         }
         
@@ -136,30 +131,5 @@ namespace RoundStart.Events
         
         #endregion
         
-        
-
-        [PluginEvent(ServerEventType.PlayerHandcuff)]
-        private void onHandcuff(PlayerHandcuffEvent playerHandcuffEvent)
-        {
-            Player player = playerHandcuffEvent.Player;
-
-            var target = playerHandcuffEvent.Target;
-            
-            if (!player.ReferenceHub.IsHuman())
-                return;
-
-            if (player.Role == RoleTypeId.ClassD)
-                return;
-            
-            if (target.ReferenceHub.IsSCP())
-                return;
-
-            player.EffectsManager.EnableEffect<MovementBoost>(1, false);
-            target.EffectsManager.ChangeState<MovementBoost>(2, 10, false);
-            
-            
-        }
-        
-
     }
 }

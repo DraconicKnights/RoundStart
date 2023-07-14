@@ -1,12 +1,12 @@
 ﻿using System;
+using PlayerRoles;
+using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
-using PluginAPI.Core;
-using PlayerRoles;
 using Scp914;
 using Random = System.Random;
 
-namespace RoundStart.Events
+namespace RoundStart.EventHandler.Events
 {
     public class SCP914ProcessPlayerEvent
     {

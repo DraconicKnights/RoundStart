@@ -1,16 +1,12 @@
-﻿using System;
+﻿using PlayerRoles;
 using PluginAPI.Core;
-using PluginAPI.Enums;
 using PluginAPI.Core.Attributes;
-using PlayerRoles;
-using UnityEngine;
-using Random = System.Random;
-using PluginAPI.Core.Interfaces;
+using PluginAPI.Enums;
 using PluginAPI.Events;
-using Object = UnityEngine.Object;
+using Random = System.Random;
 
 
-namespace RoundStart.Events
+namespace RoundStart.EventHandler.Events
 {
     public class SCP079NoiseEvent
     {
