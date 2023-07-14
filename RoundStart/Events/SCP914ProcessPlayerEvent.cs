@@ -1,27 +1,10 @@
 ﻿using System;
 using PluginAPI.Core.Attributes;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PluginAPI.Enums;
-using PluginAPI.Core.Interfaces;
-using PlayerStatsSystem;
 using PluginAPI.Core;
 using PlayerRoles;
-using System.Collections;
-using InventorySystem.Items;
-using InventorySystem;
-using PluginAPI.Core.Items;
 using Scp914;
-using System.Numerics;
-using CustomPlayerEffects;
-using Hints;
-using InventorySystem.Items.Firearms;
-using PluginAPI.Events;
-using UnityEngine;
 using Random = System.Random;
-using Vector3 = UnityEngine.Vector3;
 
 namespace RoundStart.Events
 {

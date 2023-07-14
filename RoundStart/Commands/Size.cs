@@ -1,22 +1,35 @@
 using System;
-using System.Numerics;
+using System.Reflection;
 using CommandSystem;
+using Interactables.Interobjects;
+using InventorySystem.Items.Usables;
+using MapGeneration;
+using Mirror;
 using PluginAPI.Core;
+using RemoteAdmin;
+using UnityEngine;
 
 namespace RoundStart.Commands
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]
+    [CommandHandler(typeof(ClientCommandHandler))]
     public class Size : ICommand, IUsageProvider
     {
 
         public string Command => "size";
-        public string[] Aliases { get; }
+        public string[] Aliases => null;
         public string Description => "Use to change size";
-        public string[] Usage { get; } = { "value"};
+        public string[] Usage => null;
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
+            if (!(sender is PlayerCommandSender playerCommandSender))
+            {
+                response = "This command can only be performed by players";
+                return true;
+            }
+            
             if (!sender.CheckPermission(PlayerPermissions.Noclip))
             {
                 response = "You don't have perms to use this command";
@@ -24,10 +37,23 @@ namespace RoundStart.Commands
             }
 
             var player = (Player)sender;
-            
-            player.ReferenceHub.transform.localScale.Set(0.5f, 0.5f, 0.5f);
 
-            response = null;
+            try
+            {
+                player.ReferenceHub.gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+                var netserver =
+                    typeof(NetworkServer).GetMethod("SendSpawnMessage", BindingFlags.NonPublic | BindingFlags.Static);
+                foreach (var players in Player.GetPlayers())
+                {
+                    netserver.Invoke(null, new object[] { player.ReferenceHub.networkIdentity, players.Connection });
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Info($"Plugin Error: {e}");
+            }
+
+            response = "you have changed size";
             return true;
         }
     }

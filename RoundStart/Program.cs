@@ -1,6 +1,5 @@
 ﻿using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
-using PluginAPI.Core.Factories;
 using PluginAPI.Events;
 
 namespace RoundStart
