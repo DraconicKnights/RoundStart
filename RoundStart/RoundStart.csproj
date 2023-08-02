@@ -150,7 +150,6 @@
     <Compile Include="EventHandler\EventManager\EventList.cs" />
     <Compile Include="EventHandler\EventManager\Events.cs" />
     <Compile Include="EventHandler\EventManager\EventValues.cs" />
-    <Compile Include="EventHandler\EventStartHandler.cs" />
     <Compile Include="EventHandler\Events\KeycardDoorEvent.cs" />
     <Compile Include="EventHandler\Events\SCP079NoiseEvent.cs" />
     <Compile Include="EventHandler\Events\SCP914ProcessPlayerEvent.cs" />

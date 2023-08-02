@@ -6,7 +6,6 @@ using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Enums;
 using PluginAPI.Events;
-using RoundStart.EventHandler.EventManager;
 using RoundStart.Items;
 
 namespace RoundStart.EventHandler.Events
@@ -19,11 +18,10 @@ namespace RoundStart.EventHandler.Events
         {
             var allitems = (ItemType[]) Enum.GetValues(typeof(ItemType));
             
-            foreach (ItemType item in allitems)
+            foreach (var item in allitems)
             {
                 Itemlist.addItem(item);
             }
-            
         }
         
         [PluginEvent(ServerEventType.RoundRestart)]
@@ -38,9 +36,7 @@ namespace RoundStart.EventHandler.Events
         void oninteractDoor(PlayerInteractDoorEvent playerInteractDoorEvent)
         {
 
-            Config config = new Config();
-            if (!config.KeycardDoorEvent)
-                return;
+            if (!Config.SCP914ProcessPlayerEvent == true) return;
 
             Player player = playerInteractDoorEvent.Player;
             

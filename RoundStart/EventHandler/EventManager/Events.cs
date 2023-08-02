@@ -44,10 +44,4 @@ namespace RoundStart.EventHandler.EventManager
             return "";
         }
     }
-
-    public enum EventsEnum
-    {
-        ScpContain,
-        ScpRun
-    }
 }

@@ -17,9 +17,7 @@ namespace RoundStart.EventHandler.Events
         public void onNoise(PlayerMakeNoiseEvent playerMakeNoiseEvent)
         {
 
-            Config config = new Config();
-            if (!config.SCP079NoiseEvent)
-                return;
+            if (!Config.SCP079NoiseEvent == true) return;
 
             Player player1 = playerMakeNoiseEvent.Player;
 

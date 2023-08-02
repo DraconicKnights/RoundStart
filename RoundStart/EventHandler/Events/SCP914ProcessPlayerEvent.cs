@@ -20,10 +20,7 @@ namespace RoundStart.EventHandler.Events
         void onProcesPlayer(Player player, Scp914KnobSetting setting, UnityEngine.Vector3 vector)
         {
 
-            Config config = new Config();
-
-            if (!config.SCP914ProcessPlayerEvent)
-                return;
+            if (!Config.SCP914ProcessPlayerEvent == true) return;
 
             Player player1 = ( Player)player;
 
