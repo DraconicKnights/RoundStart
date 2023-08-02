@@ -35,8 +35,8 @@ namespace RoundStart.EventHandler.Events
         [PluginEvent(ServerEventType.PlayerInteractDoor)]
         void oninteractDoor(PlayerInteractDoorEvent playerInteractDoorEvent)
         {
-
-            if (!Config.SCP914ProcessPlayerEvent == true) return;
+            
+            if (new Config().KeycardDoorEvent != true) return;
 
             Player player = playerInteractDoorEvent.Player;
             

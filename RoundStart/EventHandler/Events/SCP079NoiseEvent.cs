@@ -16,9 +16,9 @@ namespace RoundStart.EventHandler.Events
         [PluginEvent(ServerEventType.PlayerMakeNoise)]
         public void onNoise(PlayerMakeNoiseEvent playerMakeNoiseEvent)
         {
-
-            if (!Config.SCP079NoiseEvent == true) return;
-
+            
+            if (new Config().SCP079NoiseEvent != true) return;
+            
             Player player1 = playerMakeNoiseEvent.Player;
 
             int id = random.Next(10);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Org.BouncyCastle.Math.EC;
 using PlayerRoles;
 using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
@@ -20,11 +21,10 @@ namespace RoundStart.EventHandler.Events
         void onProcesPlayer(Player player, Scp914KnobSetting setting, UnityEngine.Vector3 vector)
         {
 
-            if (!Config.SCP914ProcessPlayerEvent == true) return;
+            if (new Config().SCP914ProcessPlayerEvent != true) return;
 
             Player player1 = ( Player)player;
-
-
+            
             switch (setting)
             {
                 case Scp914KnobSetting.Rough:
