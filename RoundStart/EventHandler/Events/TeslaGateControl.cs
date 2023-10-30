@@ -18,7 +18,7 @@ namespace RoundStart.EventHandler.Events
 
                 foreach (var item in player.Items)
                 {
-                    if (item.ItemTypeId == ItemType.KeycardO5) continue;
+                    if (item.ItemTypeId != ItemType.KeycardO5) return;
 
                     tesla.enabled = false;
                     tesla.InProgress = false;

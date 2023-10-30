@@ -4,9 +4,9 @@ namespace RoundStart
 {
     public class Config
     {
-        public bool Scp914ProcessPlayerEvent => true;
-        public bool Scp079NoiseEvent => true;
+        public bool Scp914ProcessPlayerEvent => false;
+        public bool Scp079NoiseEvent => false;
         public List<string> DevID { get; set; } = new List<string>();
-        public bool KeycardDoorEvent => true;
+        public bool KeycardDoorEvent => false;
     }
 }
