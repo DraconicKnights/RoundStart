@@ -1,5 +1,4 @@
 ﻿using System;
-using Org.BouncyCastle.Math.EC;
 using PlayerRoles;
 using PluginAPI.Core;
 using PluginAPI.Core.Attributes;

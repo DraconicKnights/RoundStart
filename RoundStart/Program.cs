@@ -20,6 +20,7 @@ namespace RoundStart
             EventManager.RegisterEvents<Scp914ProcessPlayerEvent>(this);
             EventManager.RegisterEvents<KeycardDoorEvent>(this);
             EventManager.RegisterEvents<WarheadEvent>(this);
+            EventManager.RegisterEvents<TeslaGateControl>(this);
         }
     }
 }

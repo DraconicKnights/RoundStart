@@ -83,7 +83,7 @@ namespace RoundStart.EventHandler.Events
                         if (doorVariant.IsConsideredOpen())
                             checkpoint.NetworkTargetState = false;
                         break;
-                    case ItemType.KeycardNTFCommander:
+                    case ItemType.KeycardMTFOperative:
                         if (!doorVariant.IsConsideredOpen())
                             checkpoint.NetworkTargetState = true;
                         if (doorVariant.IsConsideredOpen())

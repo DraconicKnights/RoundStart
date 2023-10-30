@@ -18,9 +18,9 @@ namespace RoundStart.EventHandler.Events
             
             if (new Config().Scp079NoiseEvent != true) return;
             
-            Player player1 = playerMakeNoiseEvent.Player;
+            var player1 = playerMakeNoiseEvent.Player;
 
-            int id = _random.Next(10);
+            var id = _random.Next(10);
 
             switch (id)
             {
@@ -36,7 +36,7 @@ namespace RoundStart.EventHandler.Events
         }
 
 
-        public void PlayerNoiseEvent(Player player)
+        private void PlayerNoiseEvent(Player player)
         {
             foreach (Player playerlist in Player.GetPlayers())
             {
@@ -56,7 +56,7 @@ namespace RoundStart.EventHandler.Events
 
         private void BroadcastEvent(Player scp, Player target)
         {
-            string name = target.Room.name;
+            var name = target.Room.name;
 
             scp.SendBroadcast(target.RoleName.ToString() + " Detected in " + name, 10, Broadcast.BroadcastFlags.AdminChat, false);
         }
