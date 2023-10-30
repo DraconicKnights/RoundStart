@@ -8,25 +8,24 @@ using Random = System.Random;
 
 namespace RoundStart.EventHandler.Events
 {
-    public class SCP079NoiseEvent
+    public class Scp079NoiseEvent
     {
-
-        Random random = new Random();
+        private Random _random = new Random();
 
         [PluginEvent(ServerEventType.PlayerMakeNoise)]
-        public void onNoise(PlayerMakeNoiseEvent playerMakeNoiseEvent)
+        public void OnNoise(PlayerMakeNoiseEvent playerMakeNoiseEvent)
         {
             
-            if (new Config().SCP079NoiseEvent != true) return;
+            if (new Config().Scp079NoiseEvent != true) return;
             
             Player player1 = playerMakeNoiseEvent.Player;
 
-            int id = random.Next(10);
+            int id = _random.Next(10);
 
             switch (id)
             {
                 case 5:
-                    playerNoiseEvent(player1);
+                    PlayerNoiseEvent(player1);
                     player1.SendBroadcast("You have made too much noise and alerted 079", 10, Broadcast.BroadcastFlags.Normal, false);
                     break;
                 default:
@@ -37,17 +36,17 @@ namespace RoundStart.EventHandler.Events
         }
 
 
-        public void playerNoiseEvent(Player player)
+        public void PlayerNoiseEvent(Player player)
         {
             foreach (Player playerlist in Player.GetPlayers())
             {
                 if (playerlist.Role == RoleTypeId.Scp079 && playerlist.IsAlive)
                 {
-                    Player SCP = playerlist as Player;
+                    Player scp = playerlist as Player;
 
                     Player target = player;
 
-                    broadcastEvent(SCP, target);
+                    BroadcastEvent(scp, target);
                 } else
                 {
                     return;
@@ -55,11 +54,11 @@ namespace RoundStart.EventHandler.Events
             }
         }
 
-        private void broadcastEvent(Player SCP, Player target)
+        private void BroadcastEvent(Player scp, Player target)
         {
             string name = target.Room.name;
 
-            SCP.SendBroadcast(target.RoleName.ToString() + " Detected in " + name, 10, Broadcast.BroadcastFlags.AdminChat, false);
+            scp.SendBroadcast(target.RoleName.ToString() + " Detected in " + name, 10, Broadcast.BroadcastFlags.AdminChat, false);
         }
 
 

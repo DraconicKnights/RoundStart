@@ -16,7 +16,7 @@ namespace RoundStart.EventHandler.Events
         private Random _random = new Random();
 
         [PluginEvent(ServerEventType.RoundStart)]
-        private void roundStart()
+        private void RoundStart()
         {
             var allroles = (RoleTypeId[])Enum.GetValues(typeof(RoleTypeId));
             

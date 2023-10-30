@@ -19,8 +19,7 @@ namespace RoundStart.Commands
     [CommandHandler(typeof(ClientCommandHandler))]
     public class Upgrade : ICommand, IUsageProvider
     {
-
-        Random random = new Random();
+        private Random _random = new Random();
         public string Command => "upgrade";
 
         public string[] Aliases => null;
@@ -29,7 +28,7 @@ namespace RoundStart.Commands
 
         public string[] Usage => null;
 
-        List<DoorVariant> doorslist = new List<DoorVariant>();
+        private List<DoorVariant> _doorslist = new List<DoorVariant>();
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
@@ -50,7 +49,7 @@ namespace RoundStart.Commands
             foreach (Player player in Player.GetPlayers())
             {
 
-                int id = random.Next(Itemlist.GetItemTypes().Count);
+                int id = _random.Next(Itemlist.GetItemTypes().Count);
 
                 ItemType item = Itemlist.GetItemTypes()[id];
 
@@ -63,7 +62,7 @@ namespace RoundStart.Commands
                 player.AddAmmo(ItemType.Ammo762x39, 20);
                 player.AddAmmo(ItemType.Ammo9x19, 20);
 
-                if (doorslist.IsEmpty())
+                if (_doorslist.IsEmpty())
                 {
                     foreach (DoorVariant doorVariant in DoorVariant.AllDoors)
                     {
@@ -73,7 +72,7 @@ namespace RoundStart.Commands
                         {
                             if (doorVariant.name != "CHECKPOINT")
                             {
-                                doorslist.Add(doorVariant);
+                                _doorslist.Add(doorVariant);
                                 doorVariant.NetworkTargetState = true;
                                 doorVariant.ServerChangeLock(DoorLockReason.AdminCommand, true);
                             }
@@ -88,9 +87,9 @@ namespace RoundStart.Commands
                 }
 
 
-                int doorid = random.Next(doorslist.Count);
+                int doorid = _random.Next(_doorslist.Count);
 
-                var vector3 = doorslist[doorid].transform.position;
+                var vector3 = _doorslist[doorid].transform.position;
 
                 var location = new UnityEngine.Vector3(vector3.x, vector3.y + 2, vector3.z);
 

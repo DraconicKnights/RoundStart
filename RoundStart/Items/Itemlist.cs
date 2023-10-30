@@ -4,26 +4,26 @@ namespace RoundStart.Items
 {
     public class Itemlist
     {
-        private static List<ItemType> itemTypes = new List<ItemType>();
+        private static List<ItemType> _itemTypes = new List<ItemType>();
 
         public static List<ItemType> GetItemTypes()
         {
-            return itemTypes;
+            return _itemTypes;
         }
 
-        public static void addItem(ItemType item)
+        public static void AddItem(ItemType item)
         {
-            itemTypes.Add(item);
+            _itemTypes.Add(item);
         }
 
-        public static void removeItem(ItemType item)
+        public static void RemoveItem(ItemType item)
         {
-            itemTypes.Remove(item);
+            _itemTypes.Remove(item);
         }
 
-        public static void itemClear()
+        public static void ItemClear()
         {
-            itemTypes.Clear();
+            _itemTypes.Clear();
         }
     }
 }

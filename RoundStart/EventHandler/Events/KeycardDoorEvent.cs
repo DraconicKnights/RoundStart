@@ -14,26 +14,26 @@ namespace RoundStart.EventHandler.Events
     {
 
         [PluginEvent(ServerEventType.RoundStart)]
-        void onStart()
+        private void OnStart()
         {
             var allitems = (ItemType[]) Enum.GetValues(typeof(ItemType));
             
             foreach (var item in allitems)
             {
-                Itemlist.addItem(item);
+                Itemlist.AddItem(item);
             }
         }
         
         [PluginEvent(ServerEventType.RoundRestart)]
-        void onRestart()
+        private void OnRestart()
         {
-            Itemlist.itemClear();
+            Itemlist.ItemClear();
         }
 
         #region DoorController
         
         [PluginEvent(ServerEventType.PlayerInteractDoor)]
-        void oninteractDoor(PlayerInteractDoorEvent playerInteractDoorEvent)
+        private void OninteractDoor(PlayerInteractDoorEvent playerInteractDoorEvent)
         {
             
             if (new Config().KeycardDoorEvent != true) return;
@@ -45,33 +45,33 @@ namespace RoundStart.EventHandler.Events
             if (playerInteractDoorEvent.CanOpen)
                 return;
 
-            doorEvent(player, doorVariant);
+            DoorEvent(player, doorVariant);
             
 
         }
-        private void doorEvent(Player player, DoorVariant doorVariant)
+        private void DoorEvent(Player player, DoorVariant doorVariant)
         {
             switch (doorVariant)
             {
                 case CheckpointDoor checkpoint:
                 {
-                    checkpointDoorTrigger(checkpoint, player, doorVariant);
+                    CheckpointDoorTrigger(checkpoint, player, doorVariant);
                     break;
                 }
                 case PryableDoor pryableDoor:
                 {
-                    pryableDoorTrigger(pryableDoor, player, doorVariant);
+                    PryableDoorTrigger(pryableDoor, player, doorVariant);
                     break;
                 }
                 case BreakableDoor breakableDoor:
                 {
-                    breakableDoorTrigger(breakableDoor, player, doorVariant);
+                    BreakableDoorTrigger(breakableDoor, player, doorVariant);
                     break;
                 }
             }
         }
 
-        private void checkpointDoorTrigger(CheckpointDoor checkpoint, Player player, DoorVariant doorVariant)
+        private void CheckpointDoorTrigger(CheckpointDoor checkpoint, Player player, DoorVariant doorVariant)
         {
             foreach (ItemBase item in player.Items)
             {
@@ -93,7 +93,7 @@ namespace RoundStart.EventHandler.Events
             }
         }
 
-        private void pryableDoorTrigger(PryableDoor pryableDoor, Player player, DoorVariant doorVariant)
+        private void PryableDoorTrigger(PryableDoor pryableDoor, Player player, DoorVariant doorVariant)
         {
             foreach (ItemBase item in player.Items)
             {
@@ -109,7 +109,7 @@ namespace RoundStart.EventHandler.Events
             }
         }
 
-        private void breakableDoorTrigger(BreakableDoor breakableDoor, Player player, DoorVariant doorVariant)
+        private void BreakableDoorTrigger(BreakableDoor breakableDoor, Player player, DoorVariant doorVariant)
         {
             foreach (ItemBase item in player.Items)
             {

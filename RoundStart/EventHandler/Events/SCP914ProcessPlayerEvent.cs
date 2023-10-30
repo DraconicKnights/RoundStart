@@ -9,31 +9,29 @@ using Random = System.Random;
 
 namespace RoundStart.EventHandler.Events
 {
-    public class SCP914ProcessPlayerEvent
+    public class Scp914ProcessPlayerEvent
     {
-
-        Random random = new Random();
-
+        private Random _random = new Random();
 
         #region SCP914 Player
 
         [PluginEvent(ServerEventType.Scp914ProcessPlayer)]
-        void onProcesPlayer(Player player, Scp914KnobSetting setting, UnityEngine.Vector3 vector)
+        private void OnProcesPlayer(Player player, Scp914KnobSetting setting, UnityEngine.Vector3 vector)
         {
 
-            if (new Config().SCP914ProcessPlayerEvent != true) return;
+            if (new Config().Scp914ProcessPlayerEvent != true) return;
 
             Player player1 = ( Player)player;
             
             switch (setting)
             {
                 case Scp914KnobSetting.Rough:
-                    scp914ClassSelect(player1);
+                    Scp914ClassSelect(player1);
 
                     break;
 
                 case Scp914KnobSetting.Coarse:
-                    scp914CourseSelect(player1);
+                    Scp914CourseSelect(player1);
                     break;
 
                 case Scp914KnobSetting.OneToOne:
@@ -57,9 +55,9 @@ namespace RoundStart.EventHandler.Events
 
         }
         
-        private void scp914CourseSelect(Player player)
+        private void Scp914CourseSelect(Player player)
         {
-            int id = random.Next(10);
+            int id = _random.Next(10);
 
             switch (id)
             {
@@ -88,7 +86,7 @@ namespace RoundStart.EventHandler.Events
                 }
         }
 
-        private void scp914ClassSelect(Player player)
+        private void Scp914ClassSelect(Player player)
         {
             switch (player.Role)
             {
@@ -109,11 +107,11 @@ namespace RoundStart.EventHandler.Events
 
         }
 
-        private void scp914VeryFine(Player player)
+        private void Scp914VeryFine(Player player)
         {
             var allroles = (RoleTypeId[])Enum.GetValues(typeof(RoleTypeId));
             
-            int id = random.Next(allroles.Length);
+            int id = _random.Next(allroles.Length);
 
             var role = allroles[id];
             
