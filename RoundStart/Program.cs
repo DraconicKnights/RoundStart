@@ -21,6 +21,7 @@ namespace RoundStart
             EventManager.RegisterEvents<KeycardDoorEvent>(this);
             EventManager.RegisterEvents<WarheadEvent>(this);
             EventManager.RegisterEvents<TeslaGateControl>(this);
+            EventManager.RegisterEvents<SCP079ControlEvent>(this);
         }
     }
 }
