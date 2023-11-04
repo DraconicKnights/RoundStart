@@ -1,15 +1,12 @@
 using System;
 using System.Reflection;
 using CommandSystem;
-using Interactables.Interobjects;
-using InventorySystem.Items.Usables;
-using MapGeneration;
 using Mirror;
 using PluginAPI.Core;
 using RemoteAdmin;
 using UnityEngine;
 
-namespace RoundStart.Commands
+namespace RoundStart.Commands.Test
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]

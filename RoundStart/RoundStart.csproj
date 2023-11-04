@@ -129,8 +129,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\Size.cs" />
-    <Compile Include="Commands\Upgrade.cs" />
+    <Compile Include="Commands\AdminCommands\SCPDumy.cs" />
+    <Compile Include="Commands\CommandHandler\CommandControl.cs" />
+    <Compile Include="Commands\CommandHandler\CommandHandler.cs" />
+    <Compile Include="Commands\CommandHandler\CustomPermissions.cs" />
+    <Compile Include="Commands\Test\Size.cs" />
+    <Compile Include="Commands\Test\Upgrade.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="EventHandler\EventManager\EventList.cs" />
     <Compile Include="EventHandler\EventManager\Events.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="EventHandler\Events\SCP079ControlEvent.cs" />
     <Compile Include="EventHandler\Events\SCP079NoiseEvent.cs" />
     <Compile Include="EventHandler\Events\SCP914ProcessPlayerEvent.cs" />
+    <Compile Include="EventHandler\Events\SCPBots.cs" />
     <Compile Include="EventHandler\Events\TeslaGateControl.cs" />
     <Compile Include="EventHandler\Events\WarheadEvent.cs" />
     <Compile Include="Items\Itemlist.cs" />
@@ -148,6 +153,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\PlayerCommands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

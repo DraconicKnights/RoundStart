@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Reflection;
 using PlayerRoles;
 using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
@@ -18,8 +16,7 @@ namespace RoundStart.EventHandler.Events
 
                 foreach (var item in player.Items)
                 {
-                    if (item.ItemTypeId != ItemType.KeycardO5) return;
-
+                    if (item.ItemTypeId != ItemType.KeycardO5) continue;
                     tesla.enabled = false;
                     tesla.InProgress = false;
 
@@ -27,6 +24,7 @@ namespace RoundStart.EventHandler.Events
                     {
                         tesla.enabled = true;
                     });
+
                 }
             }
         }

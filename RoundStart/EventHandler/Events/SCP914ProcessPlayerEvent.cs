@@ -20,7 +20,7 @@ namespace RoundStart.EventHandler.Events
 
             if (new Config().Scp914ProcessPlayerEvent != true) return;
 
-            Player player1 = ( Player)player;
+            var player1 = ( Player)player;
             
             switch (setting)
             {
@@ -44,6 +44,8 @@ namespace RoundStart.EventHandler.Events
                 case Scp914KnobSetting.VeryFine:
                     break;
 
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(setting), setting, null);
             }
 
 
@@ -56,7 +58,7 @@ namespace RoundStart.EventHandler.Events
         
         private void Scp914CourseSelect(Player player)
         {
-            int id = _random.Next(10);
+            var id = _random.Next(10);
 
             switch (id)
             {
