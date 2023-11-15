@@ -1,9 +1,11 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using CommandSystem;
 using Mirror;
 using PluginAPI.Core;
 using RemoteAdmin;
+using RoundStart.Commands.CommandHandler;
 using UnityEngine;
 
 namespace RoundStart.Commands.Test
@@ -11,46 +13,60 @@ namespace RoundStart.Commands.Test
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]
     [CommandHandler(typeof(ClientCommandHandler))]
-    public class Size : ICommand, IUsageProvider
+    public class Size : CustomCommandHandler.ICustomCommandHandler
     {
-
         public string Command => "size";
-        public string[] Aliases => null;
+
+        public string[] Aliases { get; } = 
+        {
+            "scale",
+            "sv"
+        };
         public string Description => "Use to change size";
-        public string[] Usage => null;
+        public string[] Usage { get; } =
+        {
+            "%players%",
+            "x",
+            "y",
+            "z"
+        };
+        
+        public string CustomPermission { get; }
+        public bool ServerCommand { get; }
         
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            if (!(sender is PlayerCommandSender playerCommandSender))
-            {
-                response = "This command can only be performed by players";
-                return true;
-            }
+
+            if (sender.CommandCheck(this, arguments, out response, out var targets, out var playerCommandSender))
+                return false;
             
             if (!sender.CheckPermission(PlayerPermissions.Noclip))
             {
                 response = "You don't have perms to use this command";
-                return true;
+                return false;
+            }
+            
+            if (!float.TryParse(arguments.Array[2], out var x) || !float.TryParse(arguments.Array[3], out var y) || !float.TryParse(arguments.Array[4], out var z))
+            {
+                response = "Valid scale not provided";
+                return false;
             }
 
-            var player = (Player)sender;
-
-            try
+            foreach (var player in targets)
             {
-                player.ReferenceHub.gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                var netserver =
-                    typeof(NetworkServer).GetMethod("SendSpawnMessage", BindingFlags.NonPublic | BindingFlags.Static);
-                foreach (var players in Player.GetPlayers())
+                var netID = player.ReferenceHub.networkIdentity;
+                player.ReferenceHub.gameObject.transform.localScale = new Vector3(1 * x, 1 * y, 1 * z);
+
+                foreach (var networkConnection in Player.GetPlayers().Select(players => players.ReferenceHub.connectionToClient))
                 {
-                    netserver.Invoke(null, new object[] { player.ReferenceHub.networkIdentity, players.Connection });
+                    typeof(NetworkServer)
+                        .GetMethod("SendSpawnMessage", BindingFlags.NonPublic | BindingFlags.Static)
+                        ?.Invoke(null, new object[] { netID, networkConnection });
                 }
             }
-            catch (Exception e)
-            {
-                Log.Info($"Plugin Error: {e}");
-            }
+            
 
-            response = "you have changed size";
+            response = $"Scale of {targets.Count} {(targets.Count != 1 ? "players" : "player")} has been set to {x}, {y}, {z}";
             return true;
         }
     }

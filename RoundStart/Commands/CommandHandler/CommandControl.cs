@@ -11,10 +11,10 @@ namespace RoundStart.Commands.CommandHandler
     public static class CommandControl
     {
         public static bool CommandCheck(this ICommandSender sender, CustomCommandHandler.ICustomCommandHandler command,
-            ArraySegment<string> args, out string response, out List<Player> players,
+            ArraySegment<string> args, out string response, out List<Player> targets,
             out PlayerCommandSender playerCommandSender)
         {
-            players = new List<Player>();
+            targets = new List<Player>();
             playerCommandSender = null;
 
             if (!command.ServerCommand && !(playerCommandSender is PlayerCommandSender playerSender))
@@ -42,7 +42,7 @@ namespace RoundStart.Commands.CommandHandler
                 }
                 else
                 {
-                    players.AddRange(hubs.Select(Player.Get));
+                    targets.AddRange(hubs.Select(player => Player.Get(player)));
                 }
             }
 
