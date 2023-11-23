@@ -89,6 +89,7 @@ namespace RoundStart.EventHandler.Events
                         if (doorVariant.IsConsideredOpen())
                             checkpoint.NetworkTargetState = false;
                         break;
+
                 }
             }
         }
