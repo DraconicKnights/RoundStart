@@ -10,6 +10,7 @@ using RoundStart.Items;
 
 namespace RoundStart.EventHandler.Events
 {
+    [Event]
     public class KeycardDoorEvent
     {
 

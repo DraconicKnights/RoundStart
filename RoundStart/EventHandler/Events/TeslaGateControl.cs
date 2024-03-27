@@ -6,6 +6,7 @@ using PluginAPI.Enums;
 
 namespace RoundStart.EventHandler.Events
 {
+    [Event]
     public class TeslaGateControl
     {
         private static void TeslaControl(TeslaGate tesla)

@@ -8,6 +8,7 @@ using Random = System.Random;
 
 namespace RoundStart.EventHandler.Events
 {
+    [Event]
     public class Scp079NoiseEvent
     {
         private Random _random = new Random();

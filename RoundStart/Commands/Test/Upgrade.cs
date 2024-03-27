@@ -1,18 +1,15 @@
-﻿using CommandSystem;
+﻿using System;
+using System.Collections.Generic;
+using CommandSystem;
 using Interactables.Interobjects;
 using Interactables.Interobjects.DoorUtils;
 using InventorySystem;
 using InventorySystem.Items.Firearms;
 using PluginAPI.Core;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using PlayerRoles.Spectating;
 using RemoteAdmin;
 using RoundStart.Items;
 
-
-namespace RoundStart.Commands
+namespace RoundStart.Commands.Test
 {
     [CommandHandler(typeof(RemoteAdminCommandHandler))]
     [CommandHandler(typeof(GameConsoleCommandHandler))]

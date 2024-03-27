@@ -1,7 +1,9 @@
-﻿using PluginAPI.Core;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using PluginAPI.Core;
 using PluginAPI.Core.Attributes;
 using PluginAPI.Events;
-using RoundStart.EventHandler.Events;
 
 namespace RoundStart
 {
@@ -15,11 +17,21 @@ namespace RoundStart
         {
             Log.Info("$Plugin is loading");
             
-            EventManager.RegisterEvents<Scp079NoiseEvent>(this);
-            EventManager.RegisterEvents<KeycardDoorEvent>(this);
-            EventManager.RegisterEvents<WarheadEvent>(this);
-            EventManager.RegisterEvents<TeslaGateControl>(this);
-            EventManager.RegisterEvents<SCP079ControlEvent>(this);
+            RegisterEvents();
+        }
+
+        private void RegisterEvents()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+
+            var eventClasses = assembly.GetTypes().Where(type => type.GetCustomAttribute<EventAttribute>() != null);
+
+            foreach (var eventClass in eventClasses)
+            {
+                var newEvent = Activator.CreateInstance(eventClass);
+                EventManager.RegisterEvents(newEvent);
+            }
         }
     }
+    
 }

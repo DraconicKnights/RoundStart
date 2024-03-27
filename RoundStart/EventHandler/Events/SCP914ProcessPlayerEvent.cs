@@ -8,6 +8,7 @@ using Random = System.Random;
 
 namespace RoundStart.EventHandler.Events
 {
+    [Event]
     public class Scp914ProcessPlayerEvent
     {
         private Random _random = new Random();

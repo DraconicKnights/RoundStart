@@ -10,6 +10,7 @@ using PluginAPI.Events;
 
 namespace RoundStart.EventHandler.Events
 {
+    [Event]
     public class SCP079ControlEvent
     {
         [PluginEvent(ServerEventType.RoundStart)]
