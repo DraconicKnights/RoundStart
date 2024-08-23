@@ -100,7 +100,7 @@ namespace RoundStart.EventHandler.Events
         {
             foreach (var players in Player.GetPlayers())
             {
-                players.SendBroadcast("SCP 079 has been Destroyed, All Control doors are now open", 10, Broadcast.BroadcastFlags.Normal);
+                players.SendBroadcast("SCP 079 has been Destroyed, All Control doors are now open", 10);
             }
         }
         
@@ -108,7 +108,7 @@ namespace RoundStart.EventHandler.Events
         {
             foreach (var players in Player.GetPlayers())
             {
-                players.SendBroadcast("SCP079 has locked down the facility and must be deactivated in order to escape", 10, Broadcast.BroadcastFlags.Normal);
+                players.SendBroadcast("SCP079 has locked down the facility and must be deactivated in order to escape", 10);
             }
         }
     }

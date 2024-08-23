@@ -18,7 +18,6 @@ namespace RoundStart.Commands.Test
     {
         private Random _random = new Random();
         public string Command => "upgrade";
-
         public string[] Aliases => null;
 
         public string Description => "Upgrade the current equipped item";
